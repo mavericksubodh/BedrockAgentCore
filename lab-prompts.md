@@ -924,3 +924,83 @@ Also delete the Cognito User Pool we created for gateway authentication.
 Use the configuration files in the project to find the resource IDs.
 Handle missing resources gracefully.
 ```
+
+---
+
+## Quick Reference Notes
+
+### AWS Resources Created
+
+| Resource | Name/ID | ARN/Endpoint |
+|----------|---------|--------------|
+| Lambda (data lookup) | `workshop-data-lookup` | `arn:aws:lambda:us-west-2:323123594531:function:workshop-data-lookup` |
+| Lambda (policy retrieval) | `workshop-policy-retrieval` | `arn:aws:lambda:us-west-2:323123594531:function:workshop-policy-retrieval` |
+| Lambda Execution Role | — | `arn:aws:iam::323123594531:role/ec2-ubuntu-kiro-workshop-lambda-role` |
+| Cognito User Pool | `workshop-gateway-auth` | `us-west-2_9TRWPJsgU` |
+| Cognito Domain | `workshop-gateway-h8pmh6` | `https://workshop-gateway-h8pmh6.auth.us-west-2.amazoncognito.com` |
+| Cognito App Client | `gateway-client` | Client ID: `7cja2otkeh83idmjkr6baaitvs` |
+| AgentCore Gateway | `workshop-gateway` | `arn:aws:bedrock-agentcore:us-west-2:323123594531:gateway/agentcoreproject-workshop-gateway-x4spqeu3ia` |
+| Gateway MCP URL | — | `https://agentcoreproject-workshop-gateway-x4spqeu3ia.gateway.bedrock-agentcore.us-west-2.amazonaws.com/mcp` |
+| AgentCore Runtime | `CustomerAssistantAgent` | `arn:aws:bedrock-agentcore:us-west-2:323123594531:runtime/AgentCoreProject_CustomerAssistantAgent-jGlt7K345l` |
+| Memory (MyMemory) | `AgentCoreProject_MyMemory-jDTKOKCddR` | `arn:aws:bedrock-agentcore:us-west-2:323123594531:memory/AgentCoreProject_MyMemory-jDTKOKCddR` |
+| Knowledge Base ID | `2J86NI00FX` | SSM: `/app/workshop/kb/knowledge-base-id` |
+
+### DynamoDB Tables (us-west-2)
+
+| Table | Partition Key | Sort Key | Attributes |
+|-------|--------------|----------|------------|
+| `workshop-customers` | `customer_id` (S) | — | `name`, `country_code` |
+| `workshop-orders` | `customer_id` (S) | `product_id` (S) | `purchased_date`, `status` |
+| `workshop-products` | `product_id` (S) | — | `product_name`, `product_category`, `provider` |
+
+### Gateway Tools Exposed
+
+| Tool Name | Target | Description |
+|-----------|--------|-------------|
+| `data-lookup___order_lookup` | workshop-data-lookup | Orders by customer_id |
+| `data-lookup___user_lookup` | workshop-data-lookup | Customer info by customer_id |
+| `data-lookup___product_lookup` | workshop-data-lookup | Product info by product_id |
+| `policy-retrieval___policy_lookup` | workshop-policy-retrieval | Return policy from KB |
+
+### Key File Locations
+
+- Agent code: `AgentCoreProject/app/CustomerAssistantAgent/main.py`
+- AgentCore config: `AgentCoreProject/agentcore/agentcore.json`
+- Env vars: `AgentCoreProject/agentcore/.env.local`
+- Tool specs: `AgentCoreProject/tool_specs/data_lookup.json`, `policy_retrieval.json`
+- Lambda code: `lambda_functions/data_lookup/handler.py`, `lambda_functions/policy_retrieval/handler.py`
+- Cognito creds: `cognito_config.json`
+- Deployed state: `AgentCoreProject/agentcore/.cli/deployed-state.json`
+
+### Useful Commands
+
+```bash
+# Validate config after edits
+cd AgentCoreProject && agentcore validate
+
+# Deploy changes
+cd AgentCoreProject && agentcore deploy
+
+# Local dev
+cd AgentCoreProject && agentcore dev
+
+# Invoke deployed agent
+cd AgentCoreProject && agentcore invoke
+
+# Check status
+cd AgentCoreProject && agentcore status
+
+# View logs
+cd AgentCoreProject && agentcore logs --since 30m
+
+# Get a Cognito token (for testing gateway manually)
+curl -X POST "https://workshop-gateway-h8pmh6.auth.us-west-2.amazoncognito.com/oauth2/token" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -u "7cja2otkeh83idmjkr6baaitvs:<client_secret>" \
+  -d "grant_type=client_credentials&scope=gateway/invoke"
+```
+
+### Git
+
+- Branch: `memoryPersisted`
+- All project files tracked as regular files (not submodules)
