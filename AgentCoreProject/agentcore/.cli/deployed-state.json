@@ -19,6 +19,15 @@
             "memoryArn": "arn:aws:bedrock-agentcore:us-west-2:323123594531:memory/AgentCoreProject_MyMemory-jDTKOKCddR"
           }
         },
+        "mcp": {
+          "gateways": {
+            "workshop-gateway": {
+              "gatewayId": "agentcoreproject-workshop-gateway-x4spqeu3ia",
+              "gatewayArn": "arn:aws:bedrock-agentcore:us-west-2:323123594531:gateway/agentcoreproject-workshop-gateway-x4spqeu3ia",
+              "gatewayUrl": "https://agentcoreproject-workshop-gateway-x4spqeu3ia.gateway.bedrock-agentcore.us-west-2.amazonaws.com/mcp"
+            }
+          }
+        },
         "harnesses": {
           "MyHarness": {
             "harnessId": "AgentCoreProject_MyHarness-7f7sdccYyE",
@@ -29,8 +38,7 @@
             "configHash": "fdc24edaa090f311"
           }
         },
-        "stackName": "AgentCore-AgentCoreProject-default",
-        "deployHash": "a36e579ad7adae23"
+        "stackName": "AgentCore-AgentCoreProject-default"
       }
     }
   }

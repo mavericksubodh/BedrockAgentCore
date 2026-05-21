@@ -472,6 +472,7 @@ Do NOT include outputSchema — only name, description, and inputSchema are need
 ```
 
 🤖 **Kiro Vibe Prompt** — Create Cognito User Pool for gateway auth
+agentcore add
 
 ```text
 Create a Cognito User Pool for the workshop gateway authentication:

@@ -1,0 +1,16 @@
+[
+  {
+    "name": "policy_lookup",
+    "description": "Retrieve return policy information from the knowledge base. Use this to answer questions about return policies, eligibility, refund rules, and product return conditions.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The natural language query about return policies (e.g. 'What is the return policy for electronics?')"
+        }
+      },
+      "required": ["query"]
+    }
+  }
+]

@@ -61,7 +61,41 @@
   "credentials": [],
   "evaluators": [],
   "onlineEvalConfigs": [],
-  "agentCoreGateways": [],
+  "agentCoreGateways": [
+    {
+      "name": "workshop-gateway",
+      "description": "Gateway for workshop-gateway",
+      "targets": [
+        {
+          "name": "data-lookup",
+          "targetType": "lambdaFunctionArn",
+          "lambdaFunctionArn": {
+            "lambdaArn": "arn:aws:lambda:us-west-2:323123594531:function:workshop-data-lookup",
+            "toolSchemaFile": "./tool_specs/data_lookup.json"
+          }
+        },
+        {
+          "name": "policy-retrieval",
+          "targetType": "lambdaFunctionArn",
+          "lambdaFunctionArn": {
+            "lambdaArn": "arn:aws:lambda:us-west-2:323123594531:function:workshop-policy-retrieval",
+            "toolSchemaFile": "./tool_specs/policy_retrieval.json"
+          }
+        }
+      ],
+      "authorizerType": "CUSTOM_JWT",
+      "authorizerConfiguration": {
+        "customJwtAuthorizer": {
+          "discoveryUrl": "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_9TRWPJsgU/.well-known/openid-configuration",
+          "allowedClients": [
+            "7cja2otkeh83idmjkr6baaitvs"
+          ]
+        }
+      },
+      "enableSemanticSearch": true,
+      "exceptionLevel": "NONE"
+    }
+  ],
   "policyEngines": [],
   "harnesses": [
     {
