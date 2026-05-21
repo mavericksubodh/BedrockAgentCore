@@ -1,0 +1,37 @@
+{
+  "targets": {
+    "default": {
+      "resources": {
+        "runtimes": {
+          "CustomerAssistantAgent": {
+            "runtimeId": "AgentCoreProject_CustomerAssistantAgent-jGlt7K345l",
+            "runtimeArn": "arn:aws:bedrock-agentcore:us-west-2:323123594531:runtime/AgentCoreProject_CustomerAssistantAgent-jGlt7K345l",
+            "roleArn": "arn:aws:iam::323123594531:role/AgentCore-AgentCoreProjec-ApplicationAgentCustomerA-96ErD5CL3jrS"
+          }
+        },
+        "memories": {
+          "CustomerAssistantAgentMemory": {
+            "memoryId": "AgentCoreProject_CustomerAssistantAgentMemory-5ULS27EVdd",
+            "memoryArn": "arn:aws:bedrock-agentcore:us-west-2:323123594531:memory/AgentCoreProject_CustomerAssistantAgentMemory-5ULS27EVdd"
+          },
+          "MyMemory": {
+            "memoryId": "AgentCoreProject_MyMemory-jDTKOKCddR",
+            "memoryArn": "arn:aws:bedrock-agentcore:us-west-2:323123594531:memory/AgentCoreProject_MyMemory-jDTKOKCddR"
+          }
+        },
+        "harnesses": {
+          "MyHarness": {
+            "harnessId": "AgentCoreProject_MyHarness-7f7sdccYyE",
+            "harnessArn": "arn:aws:bedrock-agentcore:us-west-2:323123594531:harness/AgentCoreProject_MyHarness-7f7sdccYyE",
+            "roleArn": "arn:aws:iam::323123594531:role/AgentCoreProject_MyHarness",
+            "status": "READY",
+            "agentRuntimeArn": "arn:aws:bedrock-agentcore:us-west-2:323123594531:runtime/harness_AgentCoreProject_MyHarness-9eMCWiCp4o",
+            "configHash": "fdc24edaa090f311"
+          }
+        },
+        "stackName": "AgentCore-AgentCoreProject-default",
+        "deployHash": "a36e579ad7adae23"
+      }
+    }
+  }
+}
